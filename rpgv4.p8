@@ -26,11 +26,11 @@ end
 
 -- mise a jour
 function _update()
-inventory.update()
+
     if #messages == 0 then
         player_movement()
         update_sword()
-        
+        inventory.update()
     end
     update_camera()
     update_msg()
