@@ -1,13 +1,7 @@
 pico-8 cartridge // http://www.pico-8.com
 version 38
 __lua__
-local sword = {
-    active = false,
-    sprite = 80,
-    duration = 0.15,
-    length = 16,
-    hitboxsize = 8
-}
+--declaration des variables
 local sword = {
     active = false,
     sprite = 80,
@@ -16,21 +10,33 @@ local sword = {
     hitboxsize = 8
 }
 
+local inventory = {
+    visible = false,
+    menuy = 64, -- position verticale du menu inventaire (centre de l'れたcran)
+    menuheight = 60 -- hauteur du menu inventaire
+}
+
+
+-- initialisation
 function _init()
     create_player()
     init_msg()
     init_camera()
 end
 
+-- mise a jour
 function _update()
+inventory.update()
     if #messages == 0 then
         player_movement()
         update_sword()
+        
     end
     update_camera()
     update_msg()
 end
 
+-- draw
 function _draw()
     cls()
     draw_map()
@@ -38,7 +44,7 @@ function _draw()
     draw_sword()
     draw_ui()
     draw_msg()
-    
+    inventory.draw()
 end
 
 -->8
@@ -306,27 +312,49 @@ function draw_sword()
 end
 
 -->8
---ui
-
 function draw_ui()
-camera()
-	palt(0,false) -- true or false
-	palt(12,true) -- met en transparent une couleur
-	spr(32,2)
-	palt()
-	print_outline("X"..p.keys,10,2,7)
+    camera()
+    palt(0, false)
+    palt(12, true)
+    spr(37, 2)
+    palt()
+    print_outline("X" .. p.keys, 10, 2, 7)
 end
 
-function print_outline(text,x,y)
-	print(text,x-1,y,0)
-	print(text,x+1,y,0)
-	print(text,x+1,y,0)
-	print(text,x,y-1,0)
-	print(text,x,y+1,0)
-	print(text,x,y,7)
+function print_outline(text, x, y)
+    print(text, x - 1, y, 0)
+    print(text, x + 1, y, 0)
+    print(text, x + 1, y, 0)
+    print(text, x, y - 1, 0)
+    print(text, x, y + 1, 0)
+    print(text, x, y, 7)
 end
 
+function inventory.update()
+    if btnp(5) then -- bouton "v"
+        inventory.visible = not inventory.visible
+    end
+    -- autres logiques de mise れき jour de l'inventaire
+end
 
+function inventory.draw()
+    if inventory.visible then
+        -- couleur de fond du menu inventaire
+        rectfill(0, inventory.menuy - inventory.menuheight / 2, 128, inventory.menuy + inventory.menuheight / 2, 0)
+
+        -- bordure du menu inventaire
+        rect(0, inventory.menuy - inventory.menuheight / 2, 128, inventory.menuy + inventory.menuheight / 2, 7)
+
+        -- icれひnes et descriptions des objets dans l'inventaire
+        -- dessinez vos icれひnes et textes ici
+
+        -- exemple : dessiner une icれひne de clれた
+        spr(37, 10, inventory.menuy - 8, 1, 1)
+
+        -- exemple : afficher le nombre de clれたs
+        print("x" .. p.keys, 30, inventory.menuy - 6, 7)
+    end
+end
 -->8
 --panneaux et npc
 
