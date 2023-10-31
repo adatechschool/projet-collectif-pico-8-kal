@@ -30,10 +30,11 @@ function _update()
             update_sword()
             inventory.update()
             update_camera()
-            update_msg()
+            
             p.x, p.y = go_inside(11, 19, 125, 4, "haut", "bas")
             p.x, p.y = go_inside(3, 42, 124, 63, "haut", "bas")
         end
+        update_msg()
     elseif state == 1 then
         update_gameover()
     end
@@ -181,7 +182,7 @@ function create_player()
 		sprite = 16,
 		speed = 1,
 		keys = 0,
-		life = 5,
+		life = 3,
 		  invincible_timer = 0,
 	}
 end
