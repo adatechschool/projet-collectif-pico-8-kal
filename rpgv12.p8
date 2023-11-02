@@ -35,8 +35,8 @@ function _update()
             update_sword()
             inventory.update()
       	
-		update_mob1()
-		update_mob2()
+	--	update_mob1()
+	--	update_mob2()
   kill_enemy()
   check_player_collision()
   check_enemy_collision()
@@ -67,7 +67,7 @@ function _draw()
     draw_map()
   
 	draw_mob1()
-	draw_mob2()
+--	draw_mob2()
 
     draw_player()
     draw_sword()
@@ -716,7 +716,7 @@ end
 
 
 function create_mob1()
---	add_mob1(13, 24)
+	add_mob1(13, 24)
 --	add_mob1(69,28)
 --	add_mob1(79,27)
 --	add_mob1(83,20)
